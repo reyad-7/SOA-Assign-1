@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class StudentXMLApp {
     private static final String XML_FILE_PATH = "students.xml";
+
     public static Document getDocument() {
         try {
             File file = new File(XML_FILE_PATH);
@@ -44,14 +45,14 @@ public class StudentXMLApp {
         }
     }
 
-    public static void addStudent(Document doc,Student student) {
+    public static void addStudent(Document doc, Student student) {
         Element studentElement = student.toXMLElement(doc);
         doc.getDocumentElement().appendChild(studentElement);
         System.out.println("Student added successfully.");
     }
 
-    public static void searchStudentByTag(Scanner scanner, Document doc , String tagName) {
-        System.out.print("Enter "+tagName+" to search: ");
+    public static void searchStudentByTag(Scanner scanner, Document doc, String tagName) {
+        System.out.print("Enter " + tagName + " to search: ");
         String searchValue = scanner.nextLine();
         NodeList students = doc.getElementsByTagName("Student");
         boolean found = false;
@@ -65,9 +66,21 @@ public class StudentXMLApp {
             }
         }
         if (!found) {
-            System.out.println("No students found with"+ tagName + " = " + searchValue);
+            System.out.println("No students found with" + tagName + " = " + searchValue);
         }
     }
+
+    public static boolean searchStudentByID(Document doc, String id) {
+        NodeList students = doc.getElementsByTagName("Student");
+        for (int i = 0; i < students.getLength(); i++) {
+            Element student = (Element) students.item(i);
+            String value = student.getAttributes().getNamedItem("ID").getTextContent();
+            return value.equals(id);
+        }
+        return false;
+    }
+
+
     public static void deleteStudentByID(Scanner scanner, Document doc) {
         System.out.print("Enter Student ID to delete: ");
         String deleteID = scanner.nextLine();

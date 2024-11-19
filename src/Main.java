@@ -58,8 +58,16 @@ public class Main {
         }
         while (numOfStudents > 0) {
             Student student = Student.CreateStudentFromInput(scanner);
-            StudentXMLApp.addStudent(doc, student);
-            numOfStudents--;
+            if(!StudentXMLApp.searchStudentByID(doc , student.getId())) {
+                StudentXMLApp.addStudent(doc, student);
+                numOfStudents--;
+            }
+            else
+            {
+                System.out.println("Student already exists.");
+                System.out.print("Enter student with another ID: ");
+                numOfStudents++;
+            }
         }
         StudentXMLApp.saveDocument(doc);
     }
