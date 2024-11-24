@@ -1,7 +1,6 @@
 import org.w3c.dom.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -75,12 +74,12 @@ public class StudentXMLApp {
         for (int i = 0; i < students.getLength(); i++) {
             Element student = (Element) students.item(i);
             String value = student.getAttributes().getNamedItem("ID").getTextContent();
-            return value.equals(id);
+            if (value.equals(id)) {
+                return true;
+            }
         }
         return false;
     }
-
-
     public static void deleteStudentByID(Scanner scanner, Document doc) {
         System.out.print("Enter Student ID to delete: ");
         String deleteID = scanner.nextLine();

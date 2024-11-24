@@ -1,8 +1,6 @@
 import org.w3c.dom.*;
 import java.util.Scanner;
 
-
-
 public class Student {
     private String id;
     private String firstName;
@@ -81,9 +79,7 @@ public class Student {
     /**
      * Creates a Student object by prompting user input for each field.
      */
-    public static Student CreateStudentFromInput(Scanner scanner){
-        System.out.print("Enter Student ID: ");
-        String studentID = scanner.nextLine();
+    public static Student CreateStudentFromInput(Scanner scanner,String studentID){
         System.out.print("Enter First Name: ");
         String firstName = scanner.nextLine();
         System.out.print("Enter Last Name: ");

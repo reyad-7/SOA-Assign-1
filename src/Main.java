@@ -57,18 +57,26 @@ public class Main {
             return;
         }
         while (numOfStudents > 0) {
-            Student student = Student.CreateStudentFromInput(scanner);
-            if(!StudentXMLApp.searchStudentByID(doc , student.getId())) {
-                StudentXMLApp.addStudent(doc, student);
-                numOfStudents--;
+            System.out.println("\nAdding a new student (" + numOfStudents + " remaining):");
+            String studentID;
+            while (true) {
+                System.out.print("Enter Student ID: ");
+                studentID = scanner.nextLine();
+
+                if (!StudentXMLApp.searchStudentByID(doc, studentID)) {
+                    break; // not repeated ID ,then add it to list
+
+                } else {
+                    System.out.println("Student with ID " + studentID + " already exists. Please enter another ID.");
+                }
             }
-            else
-            {
-                System.out.println("Student already exists.");
-                System.out.print("Enter student with another ID: ");
-                numOfStudents++;
-            }
+            Student student = Student.CreateStudentFromInput(scanner, studentID);
+            StudentXMLApp.addStudent(doc, student);
+            System.out.println("Student added successfully.");
+            numOfStudents--;
         }
         StudentXMLApp.saveDocument(doc);
+        System.out.println("All students have been added.");
     }
+
 }
