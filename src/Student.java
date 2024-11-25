@@ -115,6 +115,9 @@ public class Student {
     /**
      * Converts this Student object to an XML element.
      */
+    /**
+     * Converts this Student object to an XML element.
+     */
     public Element toXMLElement(Document doc) {
         Element studentElement = doc.createElement("Student");
         studentElement.setAttribute("ID", this.id);
